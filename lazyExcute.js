@@ -2,7 +2,7 @@
  * @Author: ljc
  * @Date:   2015-12-10 14:19:21
  * @Last Modified by:   ljc
- * @Last Modified time: 2015-12-12 16:51:40
+ * @Last Modified time: 2015-12-12 23:48:06
  */
 
 var LazyExcute = (function() {
@@ -96,17 +96,13 @@ var LazyExcute = (function() {
             loadScript(element);
         } else {
             var allInnerImg = element.getElementsByTagName("img");
-            if (allInnerImg.length) {
-                for (var i = 0, iLen = allInnerImg.length; i < iLen; i++) {
-                    loadImage(allInnerImg[i]);
-                }
+            for (var i = 0, iLen = allInnerImg.length; i < iLen; i++) {
+                loadImage(allInnerImg[i]);
             }
 
             var allInnerScript = element.getElementsByTagName("textarea");
-            if (allInnerScript.length) {
-                for (var j = 0, jLen = allInnerScript.length; j < jLen; j++) {
-                    loadScript(allInnerScript[j]);
-                }
+            for (var j = 0, jLen = allInnerScript.length; j < jLen; j++) {
+                loadScript(allInnerScript[j]);
             }
         }
 
@@ -142,9 +138,8 @@ var LazyExcute = (function() {
         };
     }
 
-
     function getBoundingClientRect(element) {
-        
+
         if (typeof arguments.callee.offset != "number") {
             var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
             var temp = document.createElement("div");
