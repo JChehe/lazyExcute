@@ -14,55 +14,65 @@
         height: 100%;
     }
     
-    .lazyload_container {
+    .lazyExcute_container {
         background-color: rgba(230, 230, 230, 1);
         border: 1px solid #aaa;
-        margin-bottom: 25px;
         height: 100%;
         overflow: hidden;
+        position: relative;
+        margin: 0 30px 20px;
     }
     
-    .lazyload_container img {
-        width: 100%;
+    .lazyExcute_container img {
+        max-width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
     }
+    
+    #last{
+        width: 300%;
+        margin-left: 200%;
+    }
+ 
     </style>
 </head>
 <script>
 </script>
 
 <body>
-    <div class="lazyload_container">
-        <img data-src="img/1.jpg" alt="">
+    <div class="lazyExcute_container">
+        <img data-src="http://img.hb.aicdn.com/ed6497ef92974377ffac2f0b1080a32a1e9dd0848c360-dvoosX_fw658" alt="">
     </div>
-    <div class="lazyload_container">
-        <img data-src="img/2.jpg" alt="">
+    <div class="lazyExcute_container">
+        <img data-src="http://img.hb.aicdn.com/6fd09d703d5ce899615954850ce6a200bac3339d25259-kKOTl3_fw658" alt="">
     </div>
-    <div class="lazyload_container">
-        <img data-src="img/3.jpg" alt="">
+    <div class="lazyExcute_container">
+        <img data-src="http://img.hb.aicdn.com/3a4ca536f6813887b69e24202eaacb56cf422e17feb7-KrUGDC_fw658" alt="">
     </div>
-    
-    <img data-src="img/6.jpg" alt=""  class="lazyload_container">
-    
-    <div class="lazyload_container">
-        <img data-src="img/7.jpg" alt="">
+    <img data-src="http://img.hb.aicdn.com/4a8dc452069479d42a604aaefeff30cb3b2c33be8a05-f4CzPI_fw658" alt="" class="lazyExcute_container">
+    <div class="lazyExcute_container">
+        <img data-src="http://img.hb.aicdn.com/244535f00cbabd93a58cfa660152aa88d6b6112432a3c-8fpqXy_fw658" alt="">
         <textarea name="" id="" cols="30" rows="10">
-            console.log("hahahahah")
-            var a = 1;
-            console.log(a+5)
+            console.log("hahahahah");var a = 1; console.log(a+5);
         </textarea>
     </div>
-    <div class="lazyload_container">
-        <img data-src="img/4.jpg" alt="">
-    </div>
-    <div class="lazyload_container">
-        <img data-src="img/5.jpg" alt="">
+    向右滚动，查看最后一张图片加载--》
+    <div class="lazyExcute_container" id="last">
+        <img data-src="http://img.hb.aicdn.com/893c7fae7d8cf38ec131b03a20bcddff357a164d1fb3a-fgjoYH_fw658" alt="">
     </div>
     <script src="lazyExcute.js"></script>
     <script>
-
-    var lazyload_container = document.querySelectorAll(".lazyload_container");
-    var lazy = new LazyExcute(".lazyload_container")
-
+    var lazyExcute_container = document.querySelectorAll(".lazyExcute_container");
+    var lazy = new LazyExcute(".lazyExcute_container", {
+        distance: 100,
+        callback: function() {
+            console.log("final")
+        }
+    });
     </script>
 </body>
 

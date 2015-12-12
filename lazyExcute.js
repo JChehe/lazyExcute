@@ -2,9 +2,9 @@
  * @Author: ljc
  * @Date:   2015-12-10 14:19:21
  * @Last Modified by:   ljc
- * @Last Modified time: 2015-12-12 15:46:40
+ * @Last Modified time: 2015-12-12 16:51:40
  */
-;
+
 var LazyExcute = (function() {
 
     function LazyExcute(elements, options) {
@@ -12,34 +12,34 @@ var LazyExcute = (function() {
         this.tag = "data-src";
         this.handler = function() {};
         this.callback = null;
-        this.DISTANCE = 100;
+        this.distance = 0;
         this.pause = false;
 
         if (options && typeof options === "object") {
             for (var x in options) {
-                this[x] = options[x]
+                this[x] = options[x];
             }
         }
 
         if (typeof elements === "string") {
-            this.elements = document.querySelectorAll(elements)
+            this.elements = document.querySelectorAll(elements);
         }
         var that = this;
 
         //  延时的目的是：当页面scrollTop 不为0时，再次刷新页面时，页面会从0开始，然后闪到当前scrollTop值，导致触发了window.scroll事件（特别是IE）
         setTimeout(function() {
             that.init();
-        }, 30)
+        }, 30);
     }
 
     // NodeList对象转为数组
     LazyExcute.prototype.transToArray = function() {
         var resArr = [];
         for (var i = 0, len = this.elements.length; i < len; i++) {
-            resArr.push(this.elements[i])
+            resArr.push(this.elements[i]);
         }
         this.elements = resArr;
-    }
+    };
 
     LazyExcute.prototype.init = function() {
         var that = this;
@@ -47,18 +47,18 @@ var LazyExcute = (function() {
 
         var timer = null;
         this.handler = function scrollHandler() {
-            timer && clearTimeout(timer)
+            timer && clearTimeout(timer);
             timer = setTimeout(function() {
                 that.detectElementInViewport();
             }, 20);
-        }
+        };
 
         this.detectElementInViewport();
 
         EventUtil.addHandler(window, "scroll", this.handler);
         EventUtil.addHandler(window, "resize", this.handler);
         return this;
-    }
+    };
 
     LazyExcute.prototype.detectElementInViewport = function() {
         var curViewport = getViewport();
@@ -70,10 +70,10 @@ var LazyExcute = (function() {
 
         for (var i = 0, len = elements.length; i < len; i++) {
             var element = elements[i];
-            var elePosition = getBoundingClientRect(element)
-            if ((0 <= elePosition.top && elePosition.top < curViewport.height + this.DISTANCE || elePosition.top < 0 && elePosition.bottom > 0 - this.DISTANCE) && (0 <= elePosition.left && elePosition.left < curViewport.width + this.DISTANCE || elePosition.left < 0 && elePosition.right > 0 - this.DISTANCE)) {
+            var elePosition = getBoundingClientRect(element);
+            if ((0 <= elePosition.top && elePosition.top < curViewport.height + this.distance || elePosition.top < 0 && elePosition.bottom > 0 - this.distance) && (0 <= elePosition.left && elePosition.left < curViewport.width + this.distance || elePosition.left < 0 && elePosition.right > 0 - this.distance)) {
 
-                this.loadOperation(element)
+                this.loadOperation(element);
 
                 elements.splice(i, 1);
                 len = elements.length;
@@ -82,10 +82,11 @@ var LazyExcute = (function() {
         }
 
         if (!elements.length) {
-            EventUtil.removeHandler(window, "scroll", this.handler)
+            EventUtil.removeHandler(window, "scroll", this.handler);
             this.callback && this.callback();
         }
-    }
+    };
+
     LazyExcute.prototype.loadOperation = function(element) {
         var that = this;
 
@@ -96,18 +97,17 @@ var LazyExcute = (function() {
         } else {
             var allInnerImg = element.getElementsByTagName("img");
             if (allInnerImg.length) {
-                for (var i = 0, len = allInnerImg.length; i < len; i++) {
-                    loadImage(allInnerImg[i])
+                for (var i = 0, iLen = allInnerImg.length; i < iLen; i++) {
+                    loadImage(allInnerImg[i]);
                 }
             }
 
             var allInnerScript = element.getElementsByTagName("textarea");
             if (allInnerScript.length) {
-                for (var i = 0, len = allInnerScript.length; i < len; i++) {
-                    loadScript(allInnerScript[i])
+                for (var j = 0, jLen = allInnerScript.length; j < jLen; j++) {
+                    loadScript(allInnerScript[j]);
                 }
             }
-
         }
 
         function loadImage(ele) {
@@ -123,22 +123,23 @@ var LazyExcute = (function() {
                 new Function(excluteStatement)();
             }
         }
-    }
+    };
+
     LazyExcute.prototype.restart = function() {
         this.pause = false;
         return this;
-    }
+    };
 
     LazyExcute.prototype.paused = function() {
         this.pause = true;
         return this;
-    }
+    };
 
     function getViewport() {
         return {
             width: document.documentElement.clientWidth,
             height: document.documentElement.clientHeight
-        }
+        };
     }
 
 
@@ -162,7 +163,7 @@ var LazyExcute = (function() {
             top: rect.top + offset,
             right: rect.right + offset,
             bottom: rect.bottom + offset
-        }
+        };
     }
 
     var EventUtil = {
@@ -184,6 +185,6 @@ var LazyExcute = (function() {
                 element["on" + type] = null;
             }
         }
-    }
+    };
     return LazyExcute;
 })();
