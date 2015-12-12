@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    html,
+    body {
+        height: 100%;
+    }
+    
+    .lazyload_container {
+        /*padding: 100px;*/
+        background-color: rgba(230, 230, 230, 1);
+        border: 1px solid #aaa;
+        /*margin-bottom: 25px;*/
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    .lazyload_container img {
+        width: 100%;
+    }
+    </style>
+</head>
+<script>
+</script>
+
+<body>
+    <div class="lazyload_container">
+        <img data-src="img/1.jpg" alt="">
+    </div>
+    <div class="lazyload_container">
+        <img data-src="img/2.jpg" alt="">
+    </div>
+    <div class="lazyload_container">
+        <img data-src="img/3.jpg" alt="">
+    </div>
+    
+    <img data-src="img/6.jpg" alt=""  class="lazyload_container">
+    
+    <div class="lazyload_container">
+        <img data-src="img/7.jpg" alt="">
+        <textarea name="" id="" cols="30" rows="10">
+            console.log("hahahahah")
+            var a = 1;
+            console.log(a+5)
+        </textarea>
+    </div>
+    <div class="lazyload_container">
+        <img data-src="img/4.jpg" alt="">
+    </div>
+    <div class="lazyload_container">
+        <img data-src="img/5.jpg" alt="">
+    </div>
+    <script src="lazyExcute.js"></script>
+    <script>
+
+    var lazyload_container = document.querySelectorAll(".lazyload_container");
+    var lazy = new LazyExcute(".lazyload_container")
+
+    </script>
+</body>
+
+</html>
