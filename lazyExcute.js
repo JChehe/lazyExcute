@@ -168,6 +168,7 @@ var LazyExcute = (function() {
     function isVisible(element){
         return element.offsetWidth > 0 || element.offsetHeight > 0 || element.getClientRects().length > 0
     }
+
     var EventUtil = {
         addHandler: function(element, type, handler) {
             if (element.addEventListener) {
