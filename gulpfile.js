@@ -4,7 +4,7 @@ var gulp = require("gulp"),
 	notify = require('gulp-notify');
 
 gulp.task('scripts',function(){
-  gulp.src('lazyExcute.js')
+  gulp.src('./lazyExcute.js')
     .pipe(uglify())
     .pipe(rename('lazyExcute.min.js'))
     .pipe(gulp.dest('./'))
